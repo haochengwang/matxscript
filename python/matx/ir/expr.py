@@ -1209,6 +1209,7 @@ class Call(HLOExprWithOp):
     def __init__(self, ret_type, op, args, span=Span(), type_args=None):
         if not type_args:
             type_args = []
+        print(f'ret_type = {type(ret_type)}')
         self.__init_handle_by_constructor__(_ffi_api.Call,
                                             _to_ir(ret_type),
                                             _to_ir(op),

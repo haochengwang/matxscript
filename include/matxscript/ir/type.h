@@ -1113,6 +1113,92 @@ class FileType : public Type {
   MATXSCRIPT_DEFINE_NOTNULLABLE_OBJECT_REF_METHODS(FileType, Type, FileTypeNode);
 };
 
+class RockflowContextTypeNode : public TypeNode {
+ public:
+  RockflowContextTypeNode() {
+  }
+
+  bool Iterable() const override {
+    return true;
+  }
+
+  void VisitAttrs(AttrVisitor* v) {
+    v->Visit("span", &span);
+  }
+
+  bool SEqualReduce(const RockflowContextTypeNode* other, SEqualReducer equal) const {
+    return true;
+  }
+
+  void SHashReduce(SHashReducer hash_reduce) const {
+  }
+
+  runtime::Unicode GetPythonTypeName() const override {
+    return U"RockflowContext";
+  }
+
+  static constexpr const char* _type_key = "RockflowContextType";
+  MATXSCRIPT_DECLARE_FINAL_OBJECT_INFO(RockflowContextTypeNode, TypeNode);
+};
+
+/*!
+ * \brief Managed reference to RockflowContextTypeNode.
+ * \sa RockflowContextTypeNode.
+ */
+class RockflowContextType : public Type {
+ public:
+  /*!
+   * \brief Constructor
+   * \param span The span of the type.
+   */
+  MATX_DLL explicit RockflowContextType(Span span = Span());
+
+  MATXSCRIPT_DEFINE_NOTNULLABLE_OBJECT_REF_METHODS(RockflowContextType, Type, RockflowContextTypeNode);
+};
+
+class RockflowItemAttrAssignerTypeNode : public TypeNode {
+ public:
+  RockflowItemAttrAssignerTypeNode() {
+  }
+
+  bool Iterable() const override {
+    return true;
+  }
+
+  void VisitAttrs(AttrVisitor* v) {
+    v->Visit("span", &span);
+  }
+
+  bool SEqualReduce(const RockflowItemAttrAssignerTypeNode* other, SEqualReducer equal) const {
+    return true;
+  }
+
+  void SHashReduce(SHashReducer hash_reduce) const {
+  }
+
+  runtime::Unicode GetPythonTypeName() const override {
+    return U"RockflowItemAttrAssigner";
+  }
+
+  static constexpr const char* _type_key = "RockflowItemAttrAssignerType";
+  MATXSCRIPT_DECLARE_FINAL_OBJECT_INFO(RockflowItemAttrAssignerTypeNode, TypeNode);
+};
+
+/*!
+ * \brief Managed reference to RockflowItemAttrAssignerTypeNode.
+ * \sa RockflowItemAttrAssignerTypeNode.
+ */
+class RockflowItemAttrAssignerType : public Type {
+ public:
+  /*!
+   * \brief Constructor
+   * \param span The span of the type.
+   */
+  MATX_DLL explicit RockflowItemAttrAssignerType(Span span = Span());
+
+  MATXSCRIPT_DEFINE_NOTNULLABLE_OBJECT_REF_METHODS(RockflowItemAttrAssignerType, Type, RockflowItemAttrAssignerTypeNode);
+};
+
 class TrieTypeNode : public TypeNode {
  public:
   TrieTypeNode() {

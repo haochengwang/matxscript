@@ -92,6 +92,9 @@ class _AnnTypeConvert(ast.NodeVisitor):
             "bytes_view": lambda: _ty.StringType(is_view=True),
             "unicode_view": lambda: _ty.UnicodeType(is_view=True),
             "any_view": lambda: _ty.ObjectType(is_view=True),
+
+            "RockflowContext": lambda: _ty.RockflowContextType(),
+            "RockflowItemAttrAssigner": lambda: _ty.RockflowItemAttrAssignerType(),
         }
         assert mod_ctx is None or hasattr(mod_ctx, "globals")
         self.mod_ctx = mod_ctx

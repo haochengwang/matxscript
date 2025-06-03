@@ -1488,7 +1488,10 @@ def _container_type_name(container_expr):
         _type.UserDataType: 'user_data',
         _type.TrieType: 'trie',
         _type.DynTensorType: 'ndarray',
-        _type.RegexType: 'regex'
+        _type.RegexType: 'regex',
+
+        _type.RockflowContextType: 'rockflow_context',
+        _type.RockflowItemAttrAssignerType: 'rockflow_item_attr_assigner'
     }
     name = name_map.get(type(container_expr.checked_type), 'object')
     if container_expr.checked_type.is_full_typed():
@@ -3102,3 +3105,43 @@ def make_kwargs_op(span, **kwargs):
         args.append(StringImm(key))
         args.append(value)
     return hlo_call_intrin(_type.ObjectType(), func_name, span, *args)
+
+def rockflow_get_int(span, container_expr, *args, **kwargs):
+    ret_type = _type.PrimType("int64")
+    func_name = _builtin_func_name(container_expr, "get_int")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_double(span, container_expr, *args, **kwargs):
+    ret_type = _type.PrimType("float64")
+    func_name = _builtin_func_name(container_expr, "get_double")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_string(span, container_expr, *args, **kwargs):
+    ret_type = _type.StringType()
+    func_name = _builtin_func_name(container_expr, "get_string")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_int_list(span, container_expr, *args, **kwargs):
+    ret_type = _type.ListType(True, _type.PrimType("int64"))
+    func_name = _builtin_func_name(container_expr, "get_int_list")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_double_list(span, container_expr, *args, **kwargs):
+    ret_type = _type.ListType(True, _type.PrimType("float64"))
+    func_name = _builtin_func_name(container_expr, "get_double_list")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_string_list(span, container_expr, *args, **kwargs):
+    ret_type = _type.ListType(True, _type.StringType())
+    func_name = _builtin_func_name(container_expr, "get_string_list")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_item_count(span, container_expr, *args, **kwargs):
+    ret_type = _type.PrimType("int64")
+    func_name = _builtin_func_name(container_expr, "get_item_count")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)
+
+def rockflow_get_item_attr_assigner(span, container_expr, *args, **kwargs):
+    ret_type = _type.RockflowItemAttrAssignerType()
+    func_name = _builtin_func_name(container_expr, "get_item_attr_assigner")
+    return hlo_call_intrin(ret_type, func_name, span, container_expr, *args, **kwargs)

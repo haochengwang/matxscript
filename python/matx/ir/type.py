@@ -410,3 +410,22 @@ class ExceptionType(Type):
 
     def __init__(self, name):
         self.__init_handle_by_constructor__(_ffi_api.ExceptionType, _to_ir(name))
+
+@_ffi.register_object("RockflowContextType")
+class RockflowContextType(Type):
+    """RockflowContext Type in matx ir.
+
+    """
+
+    def __init__(self):
+        self.__init_handle_by_constructor__(_ffi_api.RockflowContextType)
+
+@_ffi.register_object("RockflowItemAttrAssignerType")
+class RockflowItemAttrAssignerType(Type):
+    """RockflowItemAttr Type in matx ir.
+
+    """
+
+    def __init__(self):
+        self.__init_handle_by_constructor__(_ffi_api.RockflowItemAttrAssignerType)
+

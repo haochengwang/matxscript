@@ -124,7 +124,6 @@ def _register_str_builtin_op(method):
     base_key_name = "ir.str_" + method
     Builtin2Op.registrations[base_key_name] = getattr(_ir_op, base_func_name)
 
-
 def _register_python_builtin(method, _method=None):
     if _method is None:
         base_func_name = "object_" + method
@@ -132,6 +131,8 @@ def _register_python_builtin(method, _method=None):
         base_func_name = _method
     Builtin2Op.registrations[method] = getattr(_ir_op, base_func_name)
 
+def _register_rockflow_builtin(method, _method):
+    Builtin2Op.registrations["ir.object_" + method] = getattr(_ir_op, "rockflow_" + _method)
 
 ###############################################################################
 # Python builtin functions
@@ -310,6 +311,19 @@ _register_python_builtin("{}.runtime.ndarray.mul".format("matx"), "nd_module_mul
 _register_python_builtin("{}.runtime.ndarray.rand".format("matx"), "nd_module_rand")
 _register_python_builtin("{}.runtime.ndarray.concatenate".format("matx"), "nd_module_concatenate")
 _register_python_builtin("{}.runtime.ndarray.stack".format("matx"), "nd_module_stack")
+
+###############################################################################
+# for context
+###############################################################################
+_register_rockflow_builtin('GetInt', "get_int")
+_register_rockflow_builtin('GetDouble', "get_double")
+_register_rockflow_builtin('GetString', "get_string")
+_register_rockflow_builtin('GetIntList', "get_int_list")
+_register_rockflow_builtin('GetDoubleList', "get_double_list")
+_register_rockflow_builtin('GetStringList', "get_string_list")
+_register_rockflow_builtin('GetItemCount', "get_item_count")
+_register_rockflow_builtin('GetItemAttrAssigner', "get_item_attr_assigner")
+
 
 # TODO: support heapq
 _register_python_builtin("{}.list_sort".format("matx"), "list_module_sort")

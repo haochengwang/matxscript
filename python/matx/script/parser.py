@@ -292,7 +292,8 @@ class MATXScriptParser(ast.NodeVisitor):
         except MATXScriptError:
             raise
         except Exception as e:
-            self.report_error(str(e), type(e))
+            raise
+            #self.report_error(str(e), type(e))
         self.current_node = last_cur_node
         self.parent_node = last_parent_node
 
@@ -1297,7 +1298,8 @@ class MATXScriptParser(ast.NodeVisitor):
         try:
             return func(span, *pos_args, **kw_args)
         except BaseException as e:
-            self.report_error(str(e), SyntaxError)
+            raise e
+            #self.report_error(str(e), SyntaxError)
 
     def visit_Expr(self, node):
         """Expr visitor"""

@@ -43,3 +43,7 @@
 #include "matxscript/runtime/unicodelib/unicode_normal_form.h"
 
 #include "matxscript/runtime/pypi/kernel_farmhash.h"
+
+// For rockflow
+#include "matxscript/runtime/rockflow.h"
+

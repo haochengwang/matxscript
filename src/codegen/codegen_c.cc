@@ -742,6 +742,8 @@ void CodeGenC::PrintType(const Type& type, std::ostream& os) {  // NOLINT(*)
     os << ptr->name;
   } else if (auto* ptr = type.as<FileTypeNode>()) {
     os << "File";
+  } else if (auto* ptr = type.as<RockflowContextTypeNode>()) {
+    os << "RockflowContext";
   } else if (IsVoidType(type)) {
     os << "void";
   } else if (auto* ptr = type.as<TupleTypeNode>()) {

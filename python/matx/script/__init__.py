@@ -143,7 +143,8 @@ def from_source(compiling_obj: type):
         if MATX_DEV_MODE:
             raise
         else:
-            raise Exception(str(e)) from None
+            raise e
+            #raise Exception(str(e)) from None
 
 
 def module(obj):

@@ -457,6 +457,42 @@ MATXSCRIPT_STATIC_IR_FUNCTOR(IRDocsifier, vtable)
       return IdDoc(GetLiteralRepr(ty));
     });
 
+// RockflowContextType
+RockflowContextType::RockflowContextType(Span span) {
+  ObjectPtr<RockflowContextTypeNode> n = make_object<RockflowContextTypeNode>();
+  n->span = std::move(span);
+  data_ = std::move(n);
+}
+
+MATXSCRIPT_REGISTER_NODE_TYPE(RockflowContextTypeNode);
+
+MATXSCRIPT_REGISTER_GLOBAL("ir.RockflowContextType").set_body_typed([]() {
+  return RockflowContextType();
+});
+
+MATXSCRIPT_STATIC_IR_FUNCTOR(IRDocsifier, vtable)
+    .set_dispatch<RockflowContextType>("", [](RockflowContextType ty, ObjectPath p, IRDocsifier d) -> Doc {
+      return IdDoc(GetLiteralRepr(ty));
+    });
+
+// RockflowItemAttrAssignerType
+RockflowItemAttrAssignerType::RockflowItemAttrAssignerType(Span span) {
+  ObjectPtr<RockflowItemAttrAssignerTypeNode> n = make_object<RockflowItemAttrAssignerTypeNode>();
+  n->span = std::move(span);
+  data_ = std::move(n);
+}
+
+MATXSCRIPT_REGISTER_NODE_TYPE(RockflowItemAttrAssignerTypeNode);
+
+MATXSCRIPT_REGISTER_GLOBAL("ir.RockflowItemAttrAssignerType").set_body_typed([]() {
+  return RockflowItemAttrAssignerType();
+});
+
+MATXSCRIPT_STATIC_IR_FUNCTOR(IRDocsifier, vtable)
+    .set_dispatch<RockflowItemAttrAssignerType>("", [](RockflowItemAttrAssignerType ty, ObjectPath p, IRDocsifier d) -> Doc {
+      return IdDoc(GetLiteralRepr(ty));
+    });
+
 // TrieType
 TrieType::TrieType(Span span) {
   ObjectPtr<TrieTypeNode> n = make_object<TrieTypeNode>();
